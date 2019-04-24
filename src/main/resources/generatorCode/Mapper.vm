@@ -1,0 +1,15 @@
+/**
+* @Author: GenCode
+* @Description:代码生成器生成
+*/
+
+package ${packageName};
+import org.apache.ibatis.annotations.Mapper;
+import ${genProp.baseMapper};
+import ${modelClass};
+import java.util.List;
+@Mapper
+public interface ${className}Mapper extends YtkjCommonMapper<${className}> {
+
+
+}

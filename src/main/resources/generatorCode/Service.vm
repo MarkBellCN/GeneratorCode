@@ -1,0 +1,24 @@
+/**
+* @Author: GenCode
+* @Description:代码生成器生成
+*/
+
+package ${packageName};
+
+import java.util.List;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ${modelClass};
+import ${basePackage}.${genProp.daoPackageName}.${className}Mapper;
+import com.ytkj.util.YtkjCommonService;
+@Service
+@Transactional
+public class ${className}Service extends YtkjCommonService<${className}Mapper,${className}> {
+
+    public void delete${className}(List<String> ids){
+        for(String s:ids){
+            super.deleteById(s);
+        }
+    }
+
+}

@@ -1,0 +1,36 @@
+/**
+* @Author: GenCode
+* @Description:代码生成器生成
+*/
+
+package ${packageName};
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+import java.io.Serializable;
+@ApiModel(value = "${tableRemarks}数据模型", description = "${tableRemarks}数据模型")
+@Table(name = "${tableName}")
+public class ${className?cap_first} implements Serializable {
+
+ 	<#list propertiesMap?keys as key>
+	@Column(name = "${columnMap[key]}")
+	@ApiModelProperty(value = "${remarksMap[key]}", example = "${remarksMap[key]}")
+ 	private ${propertiesMap[key]} ${key};
+ 	
+   	</#list>
+    
+	<#list propertiesMap?keys as key>
+
+ 	public void set${key?cap_first}(${propertiesMap[key]} ${key}){
+ 		this.${key} = ${key};	
+ 	}
+ 	public ${propertiesMap[key]} get${key?cap_first}(){
+ 		return this.${key};
+ 	}
+
+    </#list>
+    
+ 
+ }

@@ -1,0 +1,41 @@
+/**
+* @Author: GenCode
+* @Description:代码生成器生成
+*/
+
+package ${packageName};
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service("${classNickName}Service")
+@Transactional
+public class ${className}ServiceImpl implements  ${className}Service{
+
+    @Autowired
+    private ${className}Mapper ${classNickName}Mapper;
+
+    public void save(${className} ${classNickName}){
+        ${classNickName}Mapper.save(${classNickName});
+    }
+
+    public ${className} queryById(String id){
+       return ${classNickName}Mapper.queryById(id);
+    }
+
+    public List<${className}> queryByCondition(${className} ${classNickName}){
+        return  ${classNickName}Mapper.queryByCondition(${classNickName});
+    }
+
+    public void deleteById(String id){
+        ${classNickName}Mapper.deleteById(id);
+    }
+
+    public void update(${className} ${classNickName}){
+        ${classNickName}Mapper.update(${classNickName});
+    }
+
+ }

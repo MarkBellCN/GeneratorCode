@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+
+   	<commentGenerator>
+		<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+		<property name="suppressAllComments" value="true" />
+	</commentGenerator>
+    
+   	<!--<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+		connectionURL="jdbc:oracle:thin:@192.168.11.216:1521:ORCL" userId="psims"
+		password="psims">
+	</jdbcConnection>-->
+      <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                      connectionURL="jdbc:oracle:thin:@192.168.11.216:1521:ORCL" userId="psims"
+                      password="psims">
+      </jdbcConnection>
+    
+	<!--  -->
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+
+    <javaModelGenerator targetPackage="com.sims.pojo" 
+    		targetProject=".\src">
+      <property name="enableSubPackages" value="false" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+
+	<!-- sqlMapGenerator：sql映射生成策略： -->
+    <sqlMapGenerator targetPackage="com.sims.mapper"  
+    	targetProject=".\src">
+      <property name="enableSubPackages" value="false" />
+    </sqlMapGenerator>
+
+	<!-- javaClientGenerator:指定mapper接口所在的位置 -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.sims.mapper"  
+    	targetProject=".\src">
+      <property name="enableSubPackages" value="false" />
+    </javaClientGenerator>
+
+	<!-- 指定要逆向分析哪些表：根据表要创建javaBean -->
+    <!--
+    <table schema="SIMS3" tableName="AIRPORT" domainObjectName="AIRPORT"></table>
+	<table schema="SIMS3" tableName="AISP_CLIENT" domainObjectName="AISP_CLIENT"></table>
+	<table schema="SIMS3" tableName="AISP_CLIENT_MSGS" domainObjectName="AISP_CLIENT_MSGS"></table>
+	<table schema="SIMS3" tableName="AISP_LOG" domainObjectName="AISP_LOG"></table>
+	<table schema="SIMS3" tableName="AISP_ROUTER" domainObjectName="AISP_ROUTER"></table>
+	<table schema="SIMS3" tableName="ARRIVAL_DYNAMIC" domainObjectName="ARRIVAL_DYNAMIC"></table>
+	<table schema="SIMS3" tableName="ARTICLE_INFO" domainObjectName="ARTICLE_INFO"></table>
+	<table schema="SIMS3" tableName="BLACKLIST" domainObjectName="BLACKLIST"></table>
+	<table schema="SIMS3" tableName="BOARD_RECORD" domainObjectName="BOARD_RECORD"></table>
+	<table schema="SIMS3" tableName="CHANNEL" domainObjectName="CHANNEL"></table>
+	<table schema="SIMS3" tableName="CHANNEL_DAILY_STAT" domainObjectName="CHANNEL_DAILY_STAT"></table>
+	<table schema="SIMS3" tableName="CLASSIFY_INFO" domainObjectName="CLASSIFY_INFO"></table>
+	<table schema="SIMS3" tableName="CONTRABAND_DISPOSITION" domainObjectName="CONTRABAND_DISPOSITION"></table>
+	<table schema="SIMS3" tableName="CONTRABAND_TYPE" domainObjectName="CONTRABAND_TYPE"></table>
+	<table schema="SIMS3" tableName="COUNTER" domainObjectName="COUNTER"></table>
+	<table schema="SIMS3" tableName="DEPARTMENT" domainObjectName="DEPARTMENT"></table>
+	<table schema="SIMS3" tableName="DEPARTURE_DYNAMIC" domainObjectName="DEPARTURE_DYNAMIC"></table>
+	<table schema="SIMS3" tableName="EMPLOYEE" domainObjectName="EMPLOYEE"></table>
+	<table schema="SIMS3" tableName="EMPLOYEE_DAILY_STAT" domainObjectName="EMPLOYEE_DAILY_STAT"></table>
+	<table schema="SIMS3" tableName="EVENT_LOG" domainObjectName="EVENT_LOG"></table>
+	<table schema="SIMS3" tableName="FIELD_INFO" domainObjectName="FIELD_INFO"></table>
+	<table schema="SIMS3" tableName="GATE" domainObjectName="GATE"></table>
+	<table schema="SIMS3" tableName="GATE_DAILY_STAT" domainObjectName="GATE_DAILY_STAT"></table>
+	<table schema="SIMS3" tableName="IDCARD" domainObjectName="IDCARD"></table>
+	<table schema="SIMS3" tableName="MEMBER_WORK_RECORD" domainObjectName="MEMBER_WORK_RECORD"></table>
+	<table schema="SIMS3" tableName="PASSENGER" domainObjectName="PASSENGER"></table>
+	<table schema="SIMS3" tableName="POST" domainObjectName="POST"></table>
+	<table schema="SIMS3" tableName="POST_ASSIGN" domainObjectName="POST_ASSIGN"></table>
+	<table schema="SIMS3" tableName="REG_LUGGAGE" domainObjectName="REG_LUGGAGE"></table>
+	<table schema="SIMS3" tableName="REGION" domainObjectName="REGION"></table>
+	<table schema="SIMS3" tableName="SUSPECT_INFO" domainObjectName="SUSPECT_INFO"></table>
+	<table schema="SIMS3" tableName="SYS_LOG" domainObjectName="SYS_LOG"></table>
+	<table schema="SIMS3" tableName="SYS_PARAM" domainObjectName="SYS_PARAM"></table>
+	<table schema="SIMS3" tableName="SYS_RESOURCE" domainObjectName="SYS_RESOURCE"></table>
+	<table schema="SIMS3" tableName="SYS_ROLE" domainObjectName="SYS_ROLE"></table>
+	<table schema="SIMS3" tableName="SYS_ROLE_RESOURCE" domainObjectName="SYS_ROLE_RESOURCE"></table>
+	<table schema="SIMS3" tableName="SYS_USER" domainObjectName="SYS_USER"></table>
+	<table schema="SIMS3" tableName="SYS_USER_ROLE" domainObjectName="SYS_USER_ROLE"></table>
+	<table schema="SIMS3" tableName="TEAM" domainObjectName="TEAM"></table>
+	<table schema="SIMS3" tableName="TEAM_DAILY_STAT" domainObjectName="TEAM_DAILY_STAT"></table>
+	<table schema="SIMS3" tableName="TEAM_MEMBER" domainObjectName="TEAM_MEMBER"></table>
+	<table schema="SIMS3" tableName="TEAM_WORK_RECORD" domainObjectName="TEAM_WORK_RECORD"></table>
+	<table schema="SIMS3" tableName="TERMINAL" domainObjectName="TERMINAL"></table>
+	<table schema="SIMS3" tableName="UNPACK_ARTICLE" domainObjectName="UNPACK_ARTICLE"></table>
+	<table schema="SIMS3" tableName="UNPACK_RECORD" domainObjectName="UNPACK_RECORD"></table>
+	<table schema="SIMS3" tableName="VERIFY_RECORD" domainObjectName="VERIFY_RECORD"></table>
+    <table schema="SIMS3" tableName="SIMS_LOG" domainObjectName="SIMS_LOG"></table>
+    <table schema="SIMS3" tableName="CONTRABAND_TYPE" domainObjectName="CONTRABAND_TYPE"></table>
+     -->
+    <table schema="SIMS3" tableName="PASSENGER" domainObjectName="Passenger"></table>
+  </context>
+</generatorConfiguration>

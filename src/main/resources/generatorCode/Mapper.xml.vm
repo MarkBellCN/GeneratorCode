@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${packageName}.${className}Mapper">
+    <resultMap id="${classNickName}" type="${packageName}.${className}" >
+        <id column="id" property="id"/>
+        <#list fieldProperties?keys as key>
+        <result column="${key}" property="${fieldProperties[key]}"/>
+        </#list>
+    </resultMap>
+    <select id="queryById" resultMap="${classNickName}" >
+      select * from ${tableName} where id= ${r"#{id}"}
+    </select>
+    <select id="queryByCondition" resultMap="${classNickName}" >
+        select * from ${tableName} where 1=1
+        <#list fieldProperties?keys as key>
+            <if test="${fieldProperties[key]}!=null">
+                and ${key}=${r"#{"}${fieldProperties[key]}${r"}"}
+            </if>
+        </#list>
+    </select>
+    <insert id="save">
+        <selectKey keyProperty="id" resultType="String" order="BEFORE">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+        insert into ${tableName}
+        (
+        <#list fieldProperties?keys as key>${key}<#sep>,</#list>
+        )
+        values(
+            <#list fieldProperties?keys as key>${r"#{"}${fieldProperties[key]}${r"}"}<#sep>,</#list>
+        )
+    </insert>
+    <update id="update">
+        update ${tableName}
+        <trim prefix="set" suffixOverrides=",">
+            <#list fieldProperties?keys as key>
+                <#if key!='id'>
+                    <if test="${fieldProperties[key]}!=null">
+                        and ${key}=${r"#{"}${fieldProperties[key]}${r"}"},
+                    </if>
+                </#if>
+          </#list>
+        </trim>
+        where id= ${r"#{id}"}
+    </update>
+</mapper>
+
+
